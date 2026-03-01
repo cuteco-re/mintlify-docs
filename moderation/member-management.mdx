@@ -1,0 +1,107 @@
+---
+title: "Member Management"
+description: "Kick members, change nicknames, and manage roles."
+icon: "users"
+---
+
+## Overview
+
+These commands handle day-to-day member management tasks — removing disruptive users, enforcing nickname policies, and toggling roles. Like all moderation commands in pom, they enforce role hierarchy to prevent misuse.
+
+---
+
+## Kick
+
+Remove a member from the server. Unlike banning, kicked members can rejoin immediately if they have an invite link.
+
+<CodeGroup>
+
+```bash Syntax
+,kick <member> [reason]
+```
+
+```bash Example
+,kick @troublemaker Breaking rules after multiple warnings
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `member` | User mention | Yes | The member to kick |
+| `reason` | Text | No | Reason for the kick, recorded in the audit log |
+
+### Safety Checks
+
+- Your highest role must be above the target's highest role
+- You cannot kick yourself or the server owner
+- pom must have Kick Members permission and a role above the target
+
+<Info>
+  You need the **Kick Members** permission to use this command.
+</Info>
+
+---
+
+## Nickname
+
+Change or reset a member's server nickname.
+
+<CodeGroup>
+
+```bash Syntax
+,nick <member> <new_nickname>
+,nick <member>
+```
+
+```bash Example
+,nick @user Friendly Name
+,nick @user
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `member` | User mention | Yes | The member whose nickname to change |
+| `new_nickname` | Text | No | The new nickname. Omit to reset to their username |
+
+<Info>
+  You need the **Manage Nicknames** permission to use this command.
+</Info>
+
+<Tip>
+  Run `,nick @user` without a new name to reset their nickname back to their default username.
+</Tip>
+
+---
+
+## Role
+
+Toggle a role on or off for a member. If the member already has the role, it's removed. If they don't have it, it's added.
+
+<CodeGroup>
+
+```bash Syntax
+,role <member> <role>
+```
+
+```bash Example
+,role @user @VIP
+,role @user @Muted
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `member` | User mention | Yes | The member to modify |
+| `role` | Role mention or name | Yes | The role to add or remove |
+
+<Info>
+  You need the **Manage Roles** permission, and the role you're assigning must be below your highest role in the hierarchy.
+</Info>
+
+<Tip>
+  This is a toggle command — running it twice on the same member removes the role. Use it for quick VIP assignments, color roles, or temporary access grants.
+</Tip>

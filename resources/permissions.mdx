@@ -1,0 +1,127 @@
+---
+title: "Permissions"
+description: "Discord permissions reference and which pom commands require them."
+icon: "shield-check"
+---
+
+## Overview
+
+Many of pom's commands require specific Discord permissions to use. This page lists which permissions are needed for each command category and explains how Discord's permission system works with pom.
+
+<Info>
+  pom enforces permissions on the **user running the command**, not just the bot. If you don't have the required permission, the command won't execute even if pom has the permission.
+</Info>
+
+---
+
+## Permission Requirements by Command
+
+### Moderation
+
+| Command | Permission Required |
+|---------|-------------------|
+| `,ban` / `,unban` | Ban Members |
+| `,kick` | Kick Members |
+| `,mute` / `,unmute` | Manage Roles |
+| `,muterole` | Manage Roles |
+| `,timeout` / `,untimeout` | Moderate Members |
+| `,nick` | Manage Nicknames |
+| `,role` | Manage Roles |
+| `,lockdown` / `,unlock` | Manage Channels |
+| `,purge` | Manage Messages |
+| `,nuke` / `,term` | Manage Channels |
+| `,pin` / `,unpin` | Manage Messages |
+| `,botclear` | Manage Messages |
+| `,clearsnipe` / `,disablesnipe` | Manage Messages |
+
+### Security
+
+| Command | Permission Required |
+|---------|-------------------|
+| `,antinuke` (all subcommands) | Administrator (server owner or antinuke admin only) |
+| `,audits` | View Audit Log |
+
+### Configuration
+
+| Command | Permission Required |
+|---------|-------------------|
+| `,welcome` / `,goodbye` / `,boost` | Manage Guild |
+| `,autoresponder` | Manage Guild |
+| `,log` | Manage Guild |
+| `,prefix` | Manage Guild |
+| `,skullboard` | Manage Guild |
+| `,botprofile` | Administrator |
+
+### Utility
+
+| Command | Permission Required |
+|---------|-------------------|
+| `,stealemote` | Manage Emojis |
+| `,stealsticker` | Manage Emojis And Stickers |
+| `,serveravatar` | Manage Guild |
+| `,serverbanner` | Manage Guild |
+
+### Features (No Permissions Required)
+
+These commands can be used by any member:
+
+`,help`, `,ping`, `,afk`, `,invite`, `,snipe`, `,avatar`, `,banner`, `,userinfo`, `,serverinfo`, `,boosters`, `,membercount`, `,names`, `,connections`, `,perms`, `,activity`, `,screentime`, `,heatmap`, `,voicetime`, `,social`, `,avatarhistory`, `,playing`, `,spotify`, `,2048`, `,chess`, `,tags`
+
+---
+
+## Discord Permission Reference
+
+A quick reference for the Discord permissions that pom uses.
+
+| Permission | What it Allows |
+|-----------|---------------|
+| **Administrator** | Full access to everything. Bypasses all permission checks |
+| **Ban Members** | Ban and unban members from the server |
+| **Kick Members** | Kick members from the server |
+| **Manage Roles** | Create, edit, delete, and assign roles below your highest role |
+| **Manage Channels** | Create, edit, delete channels and modify channel permissions |
+| **Manage Guild** | Change server name, icon, region, and other server settings |
+| **Manage Messages** | Delete other users' messages, pin/unpin messages |
+| **Manage Nicknames** | Change other members' nicknames |
+| **Manage Emojis** | Add, rename, and delete server emojis |
+| **Manage Emojis And Stickers** | Add, rename, and delete server emojis and stickers |
+| **Moderate Members** | Timeout members and manage their ability to communicate |
+| **View Audit Log** | View the server's audit log of administrative actions |
+| **Mention Everyone** | Use @everyone and @here mentions |
+| **Manage Webhooks** | Create, edit, and delete webhooks |
+| **Manage Expressions** | Manage server emojis, stickers, and soundboard sounds |
+
+---
+
+## Role Hierarchy
+
+pom enforces Discord's role hierarchy for all moderation commands:
+
+- You can only moderate members whose **highest role** is below yours
+- You **cannot** moderate the server owner
+- You **cannot** moderate yourself
+- pom's role must also be higher than the target's highest role
+
+<Warning>
+  If pom's role is below a member's role in the hierarchy, it cannot moderate that member even if you have the required permissions. Make sure pom's role is near the top of your role list.
+</Warning>
+
+---
+
+## Bot Permissions
+
+For pom to function correctly, we recommend granting it **Administrator** permission. This ensures all features work without running into permission issues.
+
+If you prefer a more restrictive setup, pom needs at minimum:
+- **Send Messages** and **Embed Links** (for responding to commands)
+- **Manage Roles** (for muting and role commands)
+- **Ban Members** and **Kick Members** (for moderation)
+- **Manage Channels** (for lockdown and channel management)
+- **Manage Messages** (for purge, pin, and message management)
+- **Manage Webhooks** (for the logging system)
+- **View Audit Log** (for identifying moderators in logs)
+- **Manage Nicknames** (for nickname commands)
+
+<Tip>
+  We strongly recommend giving pom **Administrator**. Many features require multiple permissions to work correctly, and missing even one can cause unexpected behavior.
+</Tip>

@@ -1,0 +1,89 @@
+---
+title: "Autoresponder"
+description: "Set up automatic trigger-response pairs that reply when specific words or phrases are used."
+icon: "message-circle-reply"
+---
+
+## Overview
+
+The autoresponder lets you create automatic trigger-response pairs. When a member sends a message containing a specific keyword or phrase, pom automatically replies with your configured response. Responses can be plain text or rich embeds using the [embed scripting system](/resources/embed-scripting).
+
+This is useful for answering frequently asked questions, creating fun server interactions, or providing quick info when specific topics come up.
+
+---
+
+## Adding an Autoresponder
+
+<CodeGroup>
+
+```bash Syntax
+,autoresponder add <trigger>, <response>
+```
+
+```bash Example
+,autoresponder add how do i get roles, Check out #self-roles to pick your roles!
+,autoresponder add welcome, {embed}$v{title: Welcome!}$v{description: Thanks for saying hi!}$v{color: #F4D679}
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `trigger` | Text | Yes | The keyword or phrase that triggers the response (comma-separated from the response) |
+| `response` | Text or embed script | Yes | What pom replies with. Supports [embed scripting](/resources/embed-scripting) and [variables](/resources/variables) |
+
+<Info>
+  The trigger and response are separated by a **comma**. Everything before the first comma is the trigger; everything after is the response.
+</Info>
+
+---
+
+## Managing Autoresponders
+
+### List
+
+View all configured autoresponders for the server.
+
+```bash
+,autoresponder list
+```
+
+### Remove
+
+Delete a specific autoresponder by its trigger.
+
+<CodeGroup>
+
+```bash Syntax
+,autoresponder remove <trigger>
+```
+
+```bash Example
+,autoresponder remove how do i get roles
+```
+
+</CodeGroup>
+
+### Clear
+
+Remove all autoresponders from the server.
+
+```bash
+,autoresponder clear
+```
+
+---
+
+## Tips
+
+<Tip>
+  Autoresponders are case-insensitive — a trigger of "hello" will match "Hello", "HELLO", and "hElLo".
+</Tip>
+
+<Tip>
+  Use embed scripting to make autoresponder replies look professional. For example, you can create an FAQ autoresponder that replies with a formatted embed containing useful links and information.
+</Tip>
+
+<Warning>
+  Be careful with short or common triggers — a trigger like "hi" will fire on every message containing those two letters, including words like "this" or "higher".
+</Warning>

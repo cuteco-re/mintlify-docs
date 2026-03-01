@@ -1,0 +1,87 @@
+---
+title: "Customization"
+description: "Personalize pom's appearance and your server branding."
+icon: "palette"
+---
+
+## Bot Profile
+
+You can customize how pom looks in your server using the `,botprofile` command. These changes are server-specific, so pom can have a unique name and avatar in every community.
+
+<CodeGroup>
+
+```bash Syntax
+,botprofile <name | avatar | banner | bio> <value>
+```
+
+```bash Example
+,botprofile name Pommy
+,botprofile avatar https://i.imgur.com/example.png
+```
+
+</CodeGroup>
+
+<Info>
+  Bot profile changes require the **Administrator** permission. These settings only affect how pom appears in your server — they don't change the bot globally.
+</Info>
+
+---
+
+## Server Branding
+
+Manage your server's icon and banner directly through pom without opening Discord settings.
+
+### Server Avatar
+
+<CodeGroup>
+
+```bash Syntax
+,serveravatar <url or attachment>
+```
+
+```bash Example
+,serveravatar https://i.imgur.com/new-icon.png
+```
+
+</CodeGroup>
+
+### Server Banner
+
+<CodeGroup>
+
+```bash Syntax
+,serverbanner <url or attachment>
+```
+
+```bash Example
+,serverbanner https://i.imgur.com/new-banner.png
+```
+
+</CodeGroup>
+
+<Tip>
+  You can also attach an image directly to your message instead of providing a URL. pom will use the attachment automatically.
+</Tip>
+
+---
+
+## Embed Scripting
+
+pom uses a powerful embed scripting system for welcome messages, goodbye messages, boost messages, and autoresponders. This lets you create rich Discord embeds with dynamic variables that automatically fill in user and server information.
+
+Here's a quick example:
+
+```
+{embed}$v{title: Welcome to {guild}!}$v{description: Hey {user.mention}, you are member #{user.join_position_suffix}!}$v{color: #F4D679}$v{thumbnail: {user.display_avatar}}$v{footer: Joined at}$v{timestamp}
+```
+
+This creates a gold-colored embed with the server name in the title, a personalized greeting, the user's avatar as a thumbnail, and a timestamp in the footer.
+
+<CardGroup cols={2}>
+  <Card title="Embed Scripting Reference" icon="braces" href="/resources/embed-scripting">
+    Full syntax guide for building embeds — titles, descriptions, fields, buttons, images, and more.
+  </Card>
+  <Card title="Variables Reference" icon="variable" href="/resources/variables">
+    Complete list of all dynamic variables you can use — user info, server info, dates, and more.
+  </Card>
+</CardGroup>

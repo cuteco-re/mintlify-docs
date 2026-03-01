@@ -1,0 +1,57 @@
+---
+title: "Getting Started"
+description: "Everything you need to know to get pom up and running in your server."
+icon: "sparkles"
+---
+
+## Introduction
+
+pom is a multipurpose Discord bot built to protect, manage, and enhance your server. From antinuke protection and moderation tools to activity tracking, voice channel management, and Spotify integration, pom provides everything a modern Discord community needs in a single bot.
+
+<Info>
+  The default prefix for pom is `,`. You can change it at any time with `,prefix set (symbol)`. You can also mention the bot to see your current prefix.
+</Info>
+
+## Quick Start
+
+<Steps>
+  <Step title="Invite pom to your server">
+    Use the `,invite` command or visit [cuteco.re/invite](https://cuteco.re/invite) to add pom with the necessary permissions. We recommend granting Administrator to ensure all features work correctly.
+  </Step>
+  <Step title="Set up server protection">
+    Run `,antinuke setup` to enable antinuke and create a logging channel. This protects your server from unauthorized mass-actions by staff members. See the [Antinuke guide](/security/antinuke) for full configuration.
+  </Step>
+  <Step title="Configure welcome messages">
+    Greet new members automatically with `,welcome add #channel {embed}$v{title: Welcome {user}!}$v{description: You are member #{user.join_position_suffix}}`. Check the [Welcome guide](/configuration/welcome) and [Embed Scripting reference](/resources/embed-scripting) for the full syntax.
+  </Step>
+  <Step title="Explore features">
+    Browse the sidebar to discover everything pom offers — from VoiceMaster temporary channels to activity tracking, Spotify integration, and more.
+  </Step>
+</Steps>
+
+## Explore pom
+
+<CardGroup cols={2}>
+  <Card title="Security" icon="shield" href="/security/antinuke">
+    Configure antinuke protection modules to keep your server safe from unauthorized changes and malicious staff.
+  </Card>
+  <Card title="Moderation" icon="gavel" href="/moderation/overview">
+    Ban, kick, mute, timeout, purge, lockdown, and more — all the tools you need to maintain order.
+  </Card>
+  <Card title="Configuration" icon="settings" href="/configuration/welcome">
+    Set up welcome and goodbye messages, event logging, autoresponders, skullboard, and server-wide settings.
+  </Card>
+  <Card title="Features" icon="puzzle" href="/features/voicemaster">
+    VoiceMaster temporary channels, activity tracking, Spotify integration, emoji stealing, and more.
+  </Card>
+  <Card title="Embed Scripting" icon="braces" href="/resources/embed-scripting">
+    Learn pom's powerful embed scripting syntax to create rich, dynamic messages with variables and custom formatting.
+  </Card>
+  <Card title="All Commands" icon="list" href="https://cuteco.re/commands">
+    Browse the full command list with search and filtering on the main site.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Need help? Join our [Support Server](https://discord.gg/hpZwxdpYUZ) to get assistance from the team and community.
+</Tip>

@@ -1,0 +1,139 @@
+---
+title: "Variables"
+description: "Complete reference for all dynamic variables available in pom's embed scripting system."
+icon: "variable"
+---
+
+## Overview
+
+Variables are dynamic placeholders that pom replaces with real data when a message is sent. Use them inside [embed scripts](/resources/embed-scripting) to personalize welcome messages, goodbye messages, boost messages, and autoresponders.
+
+Variables use curly brace syntax: `{variable_name}`. Nested properties use dot notation: `{user.display_avatar}`.
+
+---
+
+## User Variables
+
+Information about the member who triggered the event (the person who joined, left, boosted, etc.).
+
+| Variable | Output | Example |
+|----------|--------|---------|
+| `{user}` | Display name | `Pommy` |
+| `{user.id}` | User ID | `123456789012345678` |
+| `{user.mention}` | User mention | `@Pommy` |
+| `{user.name}` | Username (without discriminator) | `pommy` |
+| `{user.tag}` | Discriminator | `0` |
+| `{user.avatar}` | Avatar URL | `https://cdn.discordapp.com/...` |
+| `{user.display_avatar}` | Avatar URL (respects server-specific avatar) | `https://cdn.discordapp.com/...` |
+| `{user.display_name}` | Display name | `Pommy` |
+| `{user.created_at}` | Account creation date | `2023-05-15 14:30:00 UTC` |
+| `{user.created_at_timestamp}` | Unix timestamp of account creation | `1684161000` |
+| `{user.bot}` | Whether the user is a bot | `Yes` or `No` |
+| `{user.top_role}` | Highest role name | `Admin` |
+| `{user.color}` | Role color hex | `#F4D679` |
+| `{user.guild_avatar}` | Server-specific avatar URL | `https://cdn.discordapp.com/...` |
+| `{user.joined_at}` | Server join date | `2024-01-20 09:15:00 UTC` |
+| `{user.joined_at_timestamp}` | Unix timestamp of server join | `1705741500` |
+| `{user.boost}` | Whether the user is boosting | `Yes` or `No` |
+| `{user.boost_since}` | Boost start date | `2024-06-01 12:00:00 UTC` |
+| `{user.boost_since_timestamp}` | Unix timestamp of boost start | `1717243200` |
+| `{user.role_list}` | All roles as mentions (comma-separated) | `@Admin, @Mod, @Member` |
+| `{user.role_text_list}` | All role names (comma-separated) | `Admin, Mod, Member` |
+| `{user.badges}` | Public Discord badges | `Hypesquad, Early Supporter` |
+| `{user.join_position}` | Numeric join position | `42` |
+| `{user.join_position_suffix}` | Join position with ordinal suffix | `42nd` |
+
+---
+
+## Guild (Server) Variables
+
+Information about the server where the event occurred.
+
+| Variable | Output | Example |
+|----------|--------|---------|
+| `{guild}` | Server name | `My Server` |
+| `{guild.name}` | Server name | `My Server` |
+| `{guild.id}` | Server ID | `987654321098765432` |
+| `{guild.count}` | Total member count | `1,234` |
+| `{guild.icon}` | Server icon URL | `https://cdn.discordapp.com/...` |
+| `{guild.banner}` | Server banner URL | `https://cdn.discordapp.com/...` |
+| `{guild.splash}` | Invite splash URL | `https://cdn.discordapp.com/...` |
+| `{guild.discovery}` | Discovery splash URL | `https://cdn.discordapp.com/...` |
+| `{guild.owner_id}` | Server owner's user ID | `123456789012345678` |
+| `{guild.vanity}` | Vanity URL code | `myserver` or `N/A` |
+| `{guild.created_at}` | Server creation date | `2022-03-10 08:00:00 UTC` |
+| `{guild.created_at_timestamp}` | Unix timestamp of creation | `1646899200` |
+| `{guild.emoji_count}` | Total emoji count | `50` |
+| `{guild.role_count}` | Total role count | `25` |
+| `{guild.boost_count}` | Number of boosts | `14` |
+| `{guild.boost_tier}` | Boost level | `Level 2` or `No Level` |
+| `{guild.preferred_locale}` | Server language | `en-US` |
+| `{guild.shard}` | Shard ID | `0` |
+| `{guild.max_presences}` | Max presences limit | `25000` |
+| `{guild.max_members}` | Max members limit | `500000` |
+| `{guild.max_video_channel_users}` | Max video users per voice channel | `25` |
+| `{guild.afk_timeout}` | AFK timeout in seconds | `300` |
+| `{guild.afk_channel}` | AFK channel mention | `#afk` |
+| `{guild.channels_count}` | Total channels | `45` |
+| `{guild.text_channels_count}` | Text channels only | `30` |
+| `{guild.voice_channels_count}` | Voice channels only | `10` |
+| `{guild.category_channels_count}` | Categories only | `5` |
+| `{guild.channels}` | All channel mentions | `#general, #rules, ...` |
+| `{guild.text_channels}` | Text channel mentions | `#general, #rules, ...` |
+| `{guild.voice_channels}` | Voice channel mentions | `#General, #Music, ...` |
+| `{guild.category_channels}` | Category names | `General, Moderation, ...` |
+| `{guild.key_features}` | Server features | `COMMUNITY, BANNER, ...` |
+| `{guild.region}` | Server region | `us-east` |
+
+---
+
+## Channel Variables
+
+Information about the channel where the message is being sent.
+
+| Variable | Output | Example |
+|----------|--------|---------|
+| `{channel}` | Channel name | `welcome` |
+| `{channel.name}` | Channel name | `welcome` |
+| `{channel.id}` | Channel ID | `111222333444555666` |
+| `{channel.mention}` | Channel mention | `#welcome` |
+| `{channel.topic}` | Channel topic | `Welcome new members here!` |
+| `{channel.type}` | Channel type | `text` |
+| `{channel.category_id}` | Parent category ID | `999888777666555444` |
+| `{channel.category_name}` | Parent category name | `General` |
+| `{channel.position}` | Position in channel list | `3` |
+| `{channel.slowmode_delay}` | Slowmode in seconds | `5` |
+
+---
+
+## Date & Time Variables
+
+Current date and time information.
+
+| Variable | Output | Example |
+|----------|--------|---------|
+| `{date.now}` | Full date | `March 01, 2026` |
+| `{date.utc_timestamp}` | Unix timestamp | `1772515200` |
+| `{date.now_proper}` | Full date with day | `Sunday, March 01, 2026` |
+| `{date.now_short}` | Short date | `03/01/2026` |
+| `{date.now_shorter}` | Shorter date | `03/01/26` |
+| `{date.utc_now}` | Same as `{date.now}` | `March 01, 2026` |
+| `{time.now}` | 12-hour time | `2:30 PM` |
+| `{time.now_military}` | 24-hour time | `14:30` |
+| `{time.utc_now}` | Same as `{time.now}` | `2:30 PM` |
+
+---
+
+## Usage Tips
+
+<Tip>
+  The most commonly used variables are `{user}`, `{user.mention}`, `{user.display_avatar}`, `{user.join_position_suffix}`, `{guild}`, and `{guild.count}`. These cover most welcome and goodbye message needs.
+</Tip>
+
+<Tip>
+  Use `{user.display_avatar}` instead of `{user.avatar}` for thumbnails and images — it respects server-specific avatars when available.
+</Tip>
+
+<Info>
+  Variables are case-sensitive. `{User}` will not work — use `{user}`.
+</Info>

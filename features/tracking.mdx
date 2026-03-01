@@ -1,0 +1,161 @@
+---
+title: "Activity Tracking"
+description: "Visualize Discord activity with charts, heatmaps, and analytics."
+icon: "chart-area"
+---
+
+## Overview
+
+pom's activity tracking system monitors and visualizes how members interact with your server over time. It generates beautiful charts and graphics showing online status patterns, voice activity, activity heatmaps, and social connections — all rendered as images directly in Discord.
+
+These tools are great for understanding your community's engagement patterns and letting members see their own activity stats.
+
+---
+
+## Activity Chart
+
+View a visual chart of a user's recent Discord activity, showing their online, idle, DND, and offline status over time.
+
+<CodeGroup>
+
+```bash Syntax
+,activity [user]
+```
+
+```bash Example
+,activity
+,activity @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention | No | The user to check. Defaults to yourself |
+
+The chart displays a timeline of the user's Discord presence, color-coded by status (online, idle, DND, offline).
+
+---
+
+## Screentime
+
+View an Apple Screen Time-style breakdown of a user's Discord status over time. This shows how much time was spent online, idle, in DND, and offline across a period.
+
+<CodeGroup>
+
+```bash Syntax
+,screentime [user]
+```
+
+```bash Example
+,screentime
+,screentime @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention | No | The user to check. Defaults to yourself |
+
+---
+
+## Heatmap
+
+Generate a visual heatmap showing when a user is most active on Discord. The heatmap plots activity by hour of day and day of week, making it easy to see peak activity patterns.
+
+<CodeGroup>
+
+```bash Syntax
+,heatmap [user]
+```
+
+```bash Example
+,heatmap
+,heatmap @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention | No | The user to check. Defaults to yourself |
+
+<Tip>
+  Heatmaps are useful for scheduling events — find out when your community is most active and plan server events during peak hours.
+</Tip>
+
+---
+
+## Voice Time
+
+View analytics for a user's voice channel activity — how much time they've spent in voice, which channels they frequent, and their voice activity trends.
+
+<CodeGroup>
+
+```bash Syntax
+,voicetime [user]
+```
+
+```bash Example
+,voicetime
+,voicetime @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention | No | The user to check. Defaults to yourself |
+
+---
+
+## Social Graph
+
+Visualize a user's social connections within the server. This generates a network graph showing who they interact with most frequently.
+
+<CodeGroup>
+
+```bash Syntax
+,social [user]
+```
+
+```bash Example
+,social
+,social @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention | No | The user to check. Defaults to yourself |
+
+---
+
+## Avatar History
+
+Browse through a user's past profile pictures with a paginated gallery.
+
+<CodeGroup>
+
+```bash Syntax
+,avatarhistory [user]
+```
+
+```bash Example
+,avatarhistory
+,avatarhistory @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention | No | The user to check. Defaults to yourself |
+
+The gallery is paginated — use the navigation buttons to browse through previous avatars.
+
+<Info>
+  pom only tracks avatar changes from the time it starts monitoring. Historical avatars from before pom was added to your server are not available.
+</Info>

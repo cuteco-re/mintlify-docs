@@ -1,0 +1,216 @@
+---
+title: "Channel Management"
+description: "Lock channels, purge messages, nuke channels, and manage pins."
+icon: "hash"
+---
+
+## Overview
+
+pom's channel management commands give you precise control over your server's text channels. Whether you need to lock a channel during a raid, clean up spam, completely reset a channel, or manage pinned messages, these tools cover it all.
+
+---
+
+## Lockdown
+
+Prevent members from sending messages in a channel. This modifies the `@everyone` role's channel permissions to deny message sending, thread creation, and thread messaging.
+
+<CodeGroup>
+
+```bash Syntax
+,lockdown [channel]
+```
+
+```bash Example
+,lockdown
+,lockdown #general
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `channel` | Channel mention | No | The channel to lock. Defaults to the current channel |
+
+**Aliases:** `,lock`
+
+<Info>
+  You need the **Manage Channels** permission to use lockdown commands.
+</Info>
+
+### Unlock
+
+Restore message sending permissions in a locked channel.
+
+<CodeGroup>
+
+```bash Syntax
+,unlock [channel]
+```
+
+```bash Example
+,unlock
+,unlock #general
+```
+
+</CodeGroup>
+
+**Aliases:** `,unlockdown`, `,rmlockdown`
+
+---
+
+## Purge
+
+Delete messages in bulk from the current channel. You can purge all recent messages or filter by a specific member.
+
+<CodeGroup>
+
+```bash Syntax
+,purge <amount> [member]
+```
+
+```bash Example
+,purge 50
+,purge 20 @spammer
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `amount` | Number | Yes | How many messages to delete (up to 100) |
+| `member` | User mention | No | Only delete messages from this member |
+
+<Info>
+  You need the **Manage Messages** permission to use this command. Discord only allows bulk-deletion of messages less than 14 days old.
+</Info>
+
+<Tip>
+  Use `,purge 100 @bot-name` to quickly clean up bot spam, or `,botclear` for an even faster approach.
+</Tip>
+
+---
+
+## Bot Clear
+
+Quickly clean up bot messages and the command invocations that triggered them. This is a convenience command designed specifically for tidying up after bot interactions.
+
+<CodeGroup>
+
+```bash Syntax
+,botclear [amount]
+```
+
+```bash Example
+,botclear
+,botclear 50
+```
+
+</CodeGroup>
+
+<Info>
+  You need the **Manage Messages** permission to use this command.
+</Info>
+
+---
+
+## Nuke
+
+Clone the current channel and delete the original. This effectively "resets" the channel — same name, topic, permissions, and position, but with a completely clean message history.
+
+```bash
+,nuke
+```
+
+<Warning>
+  This is **irreversible**. All messages in the channel are permanently deleted. The channel is recreated with the same settings, but the message history is gone forever.
+</Warning>
+
+<Info>
+  You need the **Manage Channels** permission to use this command.
+</Info>
+
+---
+
+## Term
+
+Similar to nuke, but the original channel is archived privately instead of deleted. The channel is recreated clean, and the old channel with its message history is moved to a private archive.
+
+```bash
+,term
+```
+
+<Info>
+  You need the **Manage Channels** permission to use this command.
+</Info>
+
+<Tip>
+  Use `,term` instead of `,nuke` when you want to reset a channel but keep the old messages accessible to staff for review.
+</Tip>
+
+---
+
+## Pin & Unpin
+
+Pin or unpin a message in the current channel. You can either reply to the message you want to pin, or provide a message ID.
+
+### Pin
+
+<CodeGroup>
+
+```bash Syntax
+,pin [message_id]
+```
+
+```bash Example
+,pin
+,pin 123456789012345678
+```
+
+</CodeGroup>
+
+Reply to a message and type `,pin`, or pass the message ID directly. pom shows which pin slot the message occupies (e.g., "Pinned as pin #5").
+
+### Unpin
+
+<CodeGroup>
+
+```bash Syntax
+,unpin [message_id]
+```
+
+```bash Example
+,unpin
+,unpin 123456789012345678
+```
+
+</CodeGroup>
+
+<Info>
+  You need the **Manage Messages** permission for pin commands. Discord allows a maximum of **50 pins** per channel.
+</Info>
+
+---
+
+## Snipe Management
+
+Control the snipe system, which remembers recently deleted messages.
+
+### Clear Snipe
+
+Clear the snipe cache for the current channel, removing all stored deleted messages.
+
+```bash
+,clearsnipe
+```
+
+### Disable Snipe
+
+Disable the snipe system entirely for your server. When disabled, pom will not track deleted messages.
+
+```bash
+,disablesnipe
+```
+
+<Info>
+  You need the **Manage Messages** permission for snipe management commands.
+</Info>

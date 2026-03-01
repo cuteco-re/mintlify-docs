@@ -1,0 +1,281 @@
+---
+title: "VoiceMaster"
+description: "Create temporary voice channels that members can customize and control."
+icon: "audio-lines"
+---
+
+## Overview
+
+VoiceMaster is a Join-to-Create (JTC) voice channel system. You designate a special voice channel as the "creation" channel — when a member joins it, pom automatically creates a new temporary voice channel that the member owns. The owner can rename it, set limits, change regions, kick or ban users, and lock or unlock the channel. When everyone leaves, the channel is automatically deleted.
+
+This lets your community create on-demand voice spaces without cluttering your server with permanent empty channels.
+
+---
+
+## Setting Up VoiceMaster
+
+Run the setup command to create the category and Join-to-Create channel.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster setup [category] [jtc_channel]
+```
+
+```bash Example
+,voicemaster setup
+,voicemaster setup "Voice Channels" #join-to-create
+```
+
+</CodeGroup>
+
+If you don't specify a category or channel, pom creates them automatically.
+
+<Steps>
+  <Step title="Run setup">
+    `,voicemaster setup` — creates a "VoiceMaster" category and a "Join To Create" voice channel.
+  </Step>
+  <Step title="Members join the JTC channel">
+    When a member joins the JTC channel, pom instantly creates a new temporary voice channel in the category and moves them into it.
+  </Step>
+  <Step title="The member controls their channel">
+    The channel creator is the owner and can customize it with the commands below.
+  </Step>
+  <Step title="Auto-cleanup">
+    When all members leave a temporary channel, it's automatically deleted.
+  </Step>
+</Steps>
+
+---
+
+## Configuration Commands
+
+These commands configure the VoiceMaster system for your server. They require **Manage Guild** and **Manage Roles** permissions.
+
+### Category
+
+Set which category new temporary channels are created in.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster category <category>
+```
+
+```bash Example
+,voicemaster category "Voice Rooms"
+```
+
+</CodeGroup>
+
+### Join-to-Create Channel
+
+Set which channel triggers the creation of temporary channels.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster jtc <channel>
+```
+
+```bash Example
+,voicemaster jtc #create-voice
+```
+
+</CodeGroup>
+
+### Default Bitrate
+
+Set the default audio bitrate for all new temporary channels (in kbps).
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster bitrate <kbps>
+```
+
+```bash Example
+,voicemaster bitrate 128
+```
+
+</CodeGroup>
+
+Valid range: **64** to **320** kbps. Higher bitrate means better audio quality but more bandwidth usage.
+
+### Default Region
+
+Set the default voice region for new temporary channels.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster region <region>
+```
+
+```bash Example
+,voicemaster region us-east
+```
+
+</CodeGroup>
+
+### Default Role
+
+Assign a role automatically when a member creates a temporary channel.
+
+```bash
+,voicemaster defaultrole <role>
+,voicemaster joinrole <role>
+```
+
+### Interface Panel
+
+Set up a persistent control panel in a text channel that provides buttons for managing voice channels.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster interface <channel> [message_id]
+```
+
+```bash Example
+,voicemaster interface #voice-controls
+```
+
+</CodeGroup>
+
+If you provide an existing message ID, pom syncs to that message instead of creating a new one. The interface includes buttons for locking/unlocking, setting limits, changing bitrate, inviting users, and more.
+
+### Reset
+
+Wipe all VoiceMaster configuration (server owner only).
+
+```bash
+,voicemaster reset
+```
+
+---
+
+## Channel Owner Commands
+
+These commands are used by the member who created the temporary channel. They only work when you're in your own VoiceMaster channel.
+
+### Rename
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster name <new_name>
+```
+
+```bash Example
+,voicemaster name Gaming with friends
+```
+
+</CodeGroup>
+
+### User Limit
+
+Set the maximum number of members who can join your channel.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster limit [number]
+```
+
+```bash Example
+,voicemaster limit 5
+,voicemaster limit 0
+```
+
+</CodeGroup>
+
+Set to `0` to remove the limit.
+
+### Bitrate
+
+Change the audio quality of your channel.
+
+```bash
+,voicemaster bitrate 128
+```
+
+### Region
+
+Change the voice server region.
+
+```bash
+,voicemaster region us-west
+```
+
+### Lock / Unlock
+
+Make your channel private (invite-only) or public.
+
+```bash
+,voicemaster private
+,voicemaster public
+```
+
+### Kick a User
+
+Remove someone from your voice channel.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster kick <user>
+```
+
+```bash Example
+,voicemaster kick @annoying-user
+```
+
+</CodeGroup>
+
+### Ban / Unban
+
+Prevent a user from joining your channel, or lift the ban.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster ban <user>
+,voicemaster unban <user>
+```
+
+```bash Example
+,voicemaster ban @troll
+,voicemaster unban @troll
+```
+
+</CodeGroup>
+
+### Transfer Ownership
+
+Give someone else control of your channel.
+
+<CodeGroup>
+
+```bash Syntax
+,voicemaster transfer <user>
+```
+
+```bash Example
+,voicemaster transfer @friend
+```
+
+</CodeGroup>
+
+### Claim / Unclaim
+
+If a channel's owner leaves, another member in the channel can claim ownership.
+
+```bash
+,voicemaster claim
+,voicemaster unclaim
+```
+
+<Tip>
+  The interface panel provides a visual way to access all these controls through buttons and menus. Set it up with `,voicemaster interface #channel` so members don't need to memorize commands.
+</Tip>

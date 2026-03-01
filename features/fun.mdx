@@ -1,0 +1,61 @@
+---
+title: "Fun & Games"
+description: "Play 2048, chess, and other games directly in Discord."
+icon: "gamepad-2"
+---
+
+## Overview
+
+pom includes interactive games you can play right inside Discord. Challenge yourself with 2048 or play a game of chess against a friend — all rendered with interactive buttons and visual boards.
+
+---
+
+## 2048
+
+Play the classic 2048 number puzzle game. Combine matching tiles to reach the 2048 tile (or go beyond). The game is played using reaction buttons for directional movement.
+
+```bash
+,2048
+```
+
+### How to Play
+
+1. Run `,2048` to start a new game
+2. Use the directional buttons (up, down, left, right) to slide tiles
+3. When two tiles with the same number collide, they merge into one tile with double the value
+4. Try to reach the **2048** tile — and keep going for a high score
+5. The game ends when no more moves are possible
+
+---
+
+## Chess
+
+Play a game of chess against another member. The board is rendered visually in Discord with interactive move input.
+
+<CodeGroup>
+
+```bash Syntax
+,chess <opponent>
+```
+
+```bash Example
+,chess @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `opponent` | User mention | Yes | The member you want to challenge |
+
+### How to Play
+
+1. Challenge someone with `,chess @opponent`
+2. The opponent must accept the challenge
+3. Players take turns making moves using standard chess notation
+4. The board updates visually after each move
+5. The game ends on checkmate, stalemate, or resignation
+
+<Tip>
+  These games are a great way to keep your community engaged during slow hours. Try setting up a dedicated game channel!
+</Tip>

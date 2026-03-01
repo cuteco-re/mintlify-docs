@@ -1,0 +1,64 @@
+---
+title: "Audit Logs"
+description: "View and filter your server's recent audit log entries directly from Discord."
+icon: "scroll-text"
+---
+
+## Overview
+
+The `,audits` command gives you a quick, readable view of your server's recent audit log entries without leaving Discord. It pulls data from Discord's built-in audit log and formats it into a clean, paginated display, making it easy to see who did what and when.
+
+This is especially useful for investigating incidents — if channels were deleted, roles were changed, or members were banned, you can quickly trace the actions back to the responsible staff member.
+
+<Info>
+  You need the **View Audit Log** permission to use this command.
+</Info>
+
+---
+
+## Usage
+
+<CodeGroup>
+
+```bash Syntax
+,audits [member]
+```
+
+```bash Examples
+,audits
+,audits @suspicious-mod
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `member` | User mention or ID | No | Filter audit entries to show only actions performed by this user |
+
+---
+
+## What It Shows
+
+When you run `,audits`, pom retrieves the most recent audit log entries and displays them with:
+
+- **Action type** — what was done (ban, kick, channel delete, role update, etc.)
+- **Moderator** — who performed the action
+- **Target** — who or what was affected
+- **Timestamp** — when it happened
+- **Reason** — if one was provided
+
+The results are paginated, so you can browse through entries if there are many.
+
+---
+
+## Filtering by Member
+
+Passing a member to the command filters the audit log to only show actions that specific person performed. This is invaluable when investigating a specific staff member's recent activity.
+
+```bash
+,audits @mod-name
+```
+
+<Tip>
+  Use this after an incident to quickly see everything a particular staff member did. Combined with [antinuke](/security/antinuke) logging, this gives you a complete picture of what happened.
+</Tip>

@@ -1,0 +1,237 @@
+---
+title: "Embed Scripting"
+description: "Complete reference for pom's embed scripting syntax used in welcome, goodbye, boost, and autoresponder messages."
+icon: "braces"
+---
+
+## Overview
+
+pom uses a scripting syntax for creating rich Discord embeds in welcome messages, goodbye messages, boost messages, and autoresponders. This syntax gives you full control over every part of a Discord embed — title, description, color, images, fields, buttons, and more — along with [dynamic variables](/resources/variables) that automatically fill in user and server information.
+
+---
+
+## Basic Format
+
+An embed script starts with `{embed}` and uses `$v` as a separator between parameters:
+
+```
+{embed}$v{title: Your Title}$v{description: Your description text}$v{color: #F4D679}
+```
+
+Each parameter follows the format `{key: value}`. The `$v` separator is required between parameters.
+
+---
+
+## Parameters
+
+### Message Content
+
+Plain text that appears above the embed. This is regular message content, not part of the embed itself.
+
+```
+{message: This text appears above the embed}
+```
+
+<Info>
+  You can use `{message}` without `{embed}` to send a plain text message with no embed.
+</Info>
+
+### Title
+
+The embed's title, displayed in bold at the top.
+
+```
+{embed}$v{title: Welcome to the Server!}
+```
+
+### Description
+
+The main body text of the embed. Supports Discord markdown (bold, italic, links, etc.).
+
+```
+{embed}$v{description: Hey **{user}**, welcome to **{guild}**! Check out #rules.}
+```
+
+### URL
+
+A clickable URL attached to the embed title. The title becomes a hyperlink.
+
+```
+{embed}$v{title: Click Here}$v{url: https://cuteco.re}
+```
+
+<Info>
+  The URL must start with `http://` or `https://`.
+</Info>
+
+### Color
+
+The accent color strip on the left side of the embed. Accepts hex color codes.
+
+```
+{embed}$v{color: #F4D679}
+{embed}$v{color: #FF6B6B}
+```
+
+You can also use a decimal color value:
+
+```
+{embed}$v{color: 16045177}
+```
+
+### Image
+
+A large image displayed at the bottom of the embed.
+
+```
+{embed}$v{image: https://i.imgur.com/example.png}
+{embed}$v{image: {user.display_avatar}}
+```
+
+### Thumbnail
+
+A small image displayed in the top-right corner of the embed.
+
+```
+{embed}$v{thumbnail: {user.display_avatar}}
+{embed}$v{thumbnail: {guild.icon}}
+```
+
+### Author
+
+The author section displayed above the title. Supports a name, icon URL, and clickable URL, separated by `&&`.
+
+```
+{embed}$v{author: Author Name}
+{embed}$v{author: Author Name && https://i.imgur.com/icon.png}
+{embed}$v{author: Author Name && https://i.imgur.com/icon.png && https://cuteco.re}
+```
+
+| Part | Required | Description |
+|------|----------|-------------|
+| Name | Yes | The author text |
+| Icon URL | No | Small circular icon next to the name |
+| URL | No | Makes the author name a clickable link |
+
+### Footer
+
+The footer section at the bottom of the embed. Supports text and an icon URL, separated by `&&`.
+
+```
+{embed}$v{footer: Footer text}
+{embed}$v{footer: Footer text && https://i.imgur.com/icon.png}
+```
+
+| Part | Required | Description |
+|------|----------|-------------|
+| Text | Yes | The footer text |
+| Icon URL | No | Small circular icon next to the footer text |
+
+### Timestamp
+
+Adds the current UTC timestamp to the footer, displayed as a relative time in Discord.
+
+```
+{embed}$v{timestamp}
+```
+
+No value is needed — just include `{timestamp}`.
+
+### Fields
+
+Embed fields are titled sections with their own content. Supports a name, value, and optional inline flag, separated by `&&`.
+
+```
+{embed}$v{field: Field Name && Field value goes here}
+{embed}$v{field: Field Name && Field value && inline}
+```
+
+| Part | Required | Description |
+|------|----------|-------------|
+| Name | Yes | The field title (bold) |
+| Value | Yes | The field content |
+| Inline | No | Add `inline` to display fields side-by-side |
+
+You can add multiple fields by repeating the `{field}` parameter:
+
+```
+{embed}$v{field: Level && 5 && inline}$v{field: Rank && #12 && inline}$v{field: About && This is a full-width field}
+```
+
+### Buttons
+
+Add interactive buttons below the embed. Supports link buttons and styled buttons.
+
+```
+{embed}$v{button: link && Click Me && https://cuteco.re && enabled}
+{embed}$v{button: blurple && Button Text && emoji_name && disabled}
+```
+
+| Part | Required | Description |
+|------|----------|-------------|
+| Style | Yes | Button appearance (see table below) |
+| Label | Yes | Button text |
+| URL / Emoji | Yes | URL for link buttons, emoji for other styles |
+| State | No | `enabled` (default) or `disabled` |
+
+**Button Styles:**
+
+| Style | Appearance |
+|-------|-----------|
+| `link` | Grey with external link icon — opens a URL |
+| `blurple` | Discord blurple (primary action) |
+| `green` | Green (success action) |
+| `grey` / `gray` | Grey (secondary action) |
+| `red` | Red (danger action) |
+
+---
+
+## Flags
+
+### Self-Destruct
+
+Make the message automatically delete itself after a set number of seconds. Add this flag after your embed script.
+
+```
+{embed}$v{title: Welcome!} --self_destruct 30
+```
+
+The value must be between **6** and **60** seconds.
+
+---
+
+## Complete Examples
+
+### Welcome Message with All Features
+
+```
+{embed}$v{color: #F4D679}$v{author: {guild} && {guild.icon}}$v{title: Welcome, {user}!}$v{description: You are member **#{user.join_position_suffix}** of {guild}. We're glad to have you!}$v{thumbnail: {user.display_avatar}}$v{field: Account Created && {user.created_at} && inline}$v{field: Member Count && {guild.count} && inline}$v{footer: {guild} — Welcome}$v{timestamp}$v{button: link && Read Rules && https://discord.com/channels/xxx/yyy}
+```
+
+### Simple Goodbye
+
+```
+{embed}$v{color: #FF6B6B}$v{title: Goodbye}$v{description: **{user}** has left **{guild}**. We now have {guild.count} members.}$v{thumbnail: {user.display_avatar}}
+```
+
+### Boost Celebration
+
+```
+{embed}$v{color: #F47FFF}$v{title: New Boost!}$v{description: {user.mention} just boosted the server! We're now at **{guild.boost_count}** boosts (Level {guild.boost_tier}).}$v{image: {user.display_avatar}}$v{timestamp}
+```
+
+### Plain Text Only
+
+```
+{message: Welcome {user.mention}! Make sure to read the rules in #rules.}
+```
+
+### Text + Embed
+
+```
+{message: Hey everyone!}$v{embed}$v{title: New Member}$v{description: {user.mention} just joined!}$v{color: #5DF076}
+```
+
+<Tip>
+  Use the [Embed Builder](https://cuteco.re/embed) on the website to visually construct embed scripts and preview them before pasting into Discord.
+</Tip>

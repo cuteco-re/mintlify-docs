@@ -1,0 +1,52 @@
+---
+title: "Skullboard"
+description: "A reaction-based message board that highlights the funniest or best messages in your server."
+icon: "skull"
+---
+
+## Overview
+
+Skullboard is pom's take on a starboard — a dedicated channel where messages that receive enough reactions are automatically reposted for everyone to see. When a message hits the reaction threshold, pom copies it to your skullboard channel with the original content, author, and a link back to the original message.
+
+This is a great way to preserve and highlight the best moments in your community.
+
+---
+
+## Setting Up Skullboard
+
+<CodeGroup>
+
+```bash Syntax
+,skullboard <channel> [threshold] [emoji]
+```
+
+```bash Example
+,skullboard #hall-of-fame
+,skullboard #best-of 5
+,skullboard #skullboard 3 💀
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `channel` | Channel mention | Yes | The channel where highlighted messages will be posted |
+| `threshold` | Number | No | How many reactions a message needs to be posted (default varies) |
+| `emoji` | Emoji | No | Which emoji reaction to track (defaults to the skull emoji) |
+
+---
+
+## How It Works
+
+1. A member reacts to a message with the configured emoji (e.g., 💀)
+2. Other members add the same reaction
+3. Once the message reaches the threshold number of reactions, pom automatically posts it to the skullboard channel
+4. The skullboard post includes the original message content, any attachments, the author's name and avatar, and a jump link back to the original
+
+<Tip>
+  Set the threshold based on your server size. Smaller servers (under 50 members) work well with 3-5 reactions. Larger servers may need 10+ to keep quality high.
+</Tip>
+
+<Info>
+  Messages posted to the skullboard are not duplicated if the reaction count continues to increase after the initial post.
+</Info>

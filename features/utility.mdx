@@ -1,0 +1,247 @@
+---
+title: "Utility"
+description: "Everyday tools — help, ping, AFK, snipe, tags, emoji stealing, and more."
+icon: "wrench"
+---
+
+## Overview
+
+Utility commands are the everyday tools that make managing and interacting in your server easier. From checking bot latency to going AFK, sniping deleted messages, and stealing emojis from other servers — these are the commands you'll use most often.
+
+---
+
+## Help
+
+Browse all available commands or get detailed info about a specific one.
+
+<CodeGroup>
+
+```bash Syntax
+,help [command]
+```
+
+```bash Example
+,help
+,help ban
+,help antinuke
+```
+
+</CodeGroup>
+
+Without arguments, pom links you to the [command browser](https://cuteco.re/commands). With a command name, it shows detailed help including syntax, parameters, permissions, aliases, and subcommands.
+
+**Aliases:** `,commands`, `,cmds`, `,cmd`, `,h`
+
+---
+
+## Ping
+
+Check pom's latency and system stats.
+
+```bash
+,ping
+```
+
+Shows:
+- **Latency** — round-trip time in milliseconds
+- **CPU usage** — current processor utilization
+- **RAM usage** — current memory consumption
+
+**Aliases:** `,latency`, `,state`, `,ram`, `,cpu`, `,hostinfo`
+
+---
+
+## AFK
+
+Set yourself as AFK globally. When someone mentions you while you're AFK, pom lets them know you're away and shows your reason.
+
+<CodeGroup>
+
+```bash Syntax
+,afk [reason]
+```
+
+```bash Example
+,afk
+,afk eating dinner, back in 30
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `reason` | Text | No | Why you're going AFK |
+
+Your AFK status is automatically removed when you send a message.
+
+---
+
+## Invite
+
+Get an invite link to add pom to another server.
+
+```bash
+,invite
+```
+
+**Aliases:** `,inv`, `,add`, `,botinvite`, `,invitebot`
+
+---
+
+## Snipe
+
+View the most recently deleted message in the current channel. You can browse multiple deleted messages by index.
+
+<CodeGroup>
+
+```bash Syntax
+,snipe [index]
+```
+
+```bash Example
+,snipe
+,snipe 2
+,snipe 5
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `index` | Number | No | Which deleted message to show (1 = most recent, 2 = second most recent, etc.) |
+
+Shows the deleted message content, author, and when it was deleted.
+
+<Info>
+  Server admins can disable sniping with `,disablesnipe` and clear the snipe cache with `,clearsnipe`. See [Channel Management](/moderation/channel-management) for details.
+</Info>
+
+---
+
+## Tags
+
+Create and manage reusable text snippets for your server. Tags are a quick way to store and retrieve frequently used information.
+
+```bash
+,tags
+```
+
+Opens the tags menu where you can create, edit, delete, and browse server tags.
+
+---
+
+## Steal Emote
+
+Add an emoji from another server to yours. You can provide a custom emoji, an image URL, or an emoji from a message.
+
+<CodeGroup>
+
+```bash Syntax
+,stealemote <emoji or url> [name]
+```
+
+```bash Example
+,stealemote <:cool:123456789>
+,stealemote <:cool:123456789> my_cool_emoji
+,stealemote https://i.imgur.com/example.png cool_face
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `emoji or url` | Custom emoji or image URL | Yes | The emoji to steal or an image URL to upload |
+| `name` | Text | No | Custom name for the emoji. If omitted, uses the original name |
+
+pom handles animated emojis (uploaded as GIF) and resolves name conflicts by appending `_1`, `_2`, etc.
+
+**Aliases:** `,esteal`, `,stealemoji`, `,emotesteal`, `,emojisteal`
+
+<Info>
+  You need the **Manage Emojis** permission to use this command.
+</Info>
+
+---
+
+## Steal Sticker
+
+Add a sticker from another message to your server. Reply to a message containing a sticker, or send a sticker with the command.
+
+<CodeGroup>
+
+```bash Syntax
+,stealsticker [name]
+```
+
+```bash Example
+,stealsticker
+,stealsticker my_cool_sticker
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | Text | No | Custom name for the sticker |
+
+**Aliases:** `,ssteal`, `,stickersteal`
+
+<Info>
+  You need the **Manage Emojis And Stickers** permission to use this command.
+</Info>
+
+---
+
+## Server Avatar
+
+Change your server's icon.
+
+<CodeGroup>
+
+```bash Syntax
+,serveravatar <url or attachment>
+```
+
+```bash Example
+,serveravatar https://i.imgur.com/new-icon.png
+```
+
+</CodeGroup>
+
+<Info>
+  You need the **Manage Guild** permission to use this command.
+</Info>
+
+---
+
+## Server Banner
+
+Change your server's banner image.
+
+<CodeGroup>
+
+```bash Syntax
+,serverbanner <url or attachment>
+```
+
+```bash Example
+,serverbanner https://i.imgur.com/new-banner.png
+```
+
+</CodeGroup>
+
+<Info>
+  You need the **Manage Guild** permission and your server must be **Boost Level 2** or higher to set a banner.
+</Info>
+
+---
+
+## Spotify Link
+
+Connect your Spotify account to pom for the [Spotify integration](/features/spotify).
+
+```bash
+,link
+```
+
+This initiates the OAuth flow to authorize pom to view your currently playing track.

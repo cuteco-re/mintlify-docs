@@ -1,122 +1,100 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "theme": "almond",
+  "name": "pom docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#F4D679",
+    "light": "#F9E8A8",
+    "dark": "#D4B85C"
   },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+  "icons": {
+    "library": "lucide"
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+  "logo": "/assets/pom.png",
+  "favicon": "/assets/pom.png",
+  "appearance": {
+    "default": "dark",
+    "strict": true
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Home",
+        "href": "https://cuteco.re"
+      },
+      {
+        "label": "Commands",
+        "href": "https://cuteco.re/commands"
+      },
+      {
+        "label": "Discord",
+        "href": "https://discord.gg/hpZwxdpYUZ"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "discord": "https://discord.gg/hpZwxdpYUZ"
     }
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Overview",
+        "pages": [
+          "getting-started",
+          "customization"
+        ]
+      },
+      {
+        "group": "Security",
+        "pages": [
+          "security/antinuke",
+          "security/audits"
+        ]
+      },
+      {
+        "group": "Moderation",
+        "pages": [
+          "moderation/overview",
+          "moderation/banning",
+          "moderation/muting",
+          "moderation/channel-management",
+          "moderation/member-management"
+        ]
+      },
+      {
+        "group": "Configuration",
+        "pages": [
+          "configuration/welcome",
+          "configuration/goodbye",
+          "configuration/boost",
+          "configuration/autoresponder",
+          "configuration/logging",
+          "configuration/prefix",
+          "configuration/skullboard",
+          "configuration/botprofile"
+        ]
+      },
+      {
+        "group": "Features",
+        "pages": [
+          "features/voicemaster",
+          "features/tracking",
+          "features/information",
+          "features/utility",
+          "features/spotify",
+          "features/fun"
+        ]
+      },
+      {
+        "group": "Resources",
+        "pages": [
+          "resources/embed-scripting",
+          "resources/variables",
+          "resources/permissions"
+        ]
+      }
+    ]
   }
 }

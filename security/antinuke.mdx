@@ -1,0 +1,407 @@
+---
+title: "Antinuke"
+description: "Protect your server from malicious staff actions with automatic detection and punishment."
+icon: "fingerprint"
+---
+
+## What is Antinuke?
+
+Antinuke is pom's server protection system. It monitors your staff members' actions in real time and automatically punishes anyone who exceeds the limits you define. If a compromised or rogue staff member tries to mass-ban members, delete channels, or make other destructive changes, antinuke catches them before the damage spreads.
+
+Each protection type is called a **module**. You can enable or disable modules independently, set how many violations trigger a response (the **threshold**), and choose the **punishment** applied when the threshold is exceeded.
+
+<Info>
+  Only the **server owner** can configure antinuke by default. You can grant other trusted users access with `,antinuke admin add @user`.
+</Info>
+
+---
+
+## Setting Up Antinuke
+
+Run the setup command to initialize antinuke and create a dedicated logging channel.
+
+<CodeGroup>
+
+```bash Syntax
+,antinuke setup [channel]
+```
+
+```bash Example
+,antinuke setup
+,antinuke setup #antinuke-logs
+```
+
+</CodeGroup>
+
+If you don't specify a channel, pom creates an `antinuke-logs` channel automatically. This is where all antinuke events and punishments are recorded.
+
+<Warning>
+  pom requires **Administrator** permission for antinuke to function properly. Without it, the bot cannot detect or reverse malicious actions.
+</Warning>
+
+---
+
+## Viewing Configuration
+
+Check your current antinuke settings at any time:
+
+```bash
+,antinuke config
+```
+
+This shows all enabled modules, their thresholds, punishments, and the number of whitelisted users.
+
+To see a paginated list of modules and whitelisted users:
+
+```bash
+,antinuke list
+```
+
+---
+
+## Admin Management
+
+By default, only the server owner can modify antinuke settings. You can grant other users admin access, which also automatically whitelists them.
+
+<CodeGroup>
+
+```bash Syntax
+,antinuke admin add <user>
+,antinuke admin remove <user>
+```
+
+```bash Example
+,antinuke admin add @trusted-admin
+```
+
+</CodeGroup>
+
+<Warning>
+  Antinuke admins can **completely change** your antinuke configuration. Only grant this to users you fully trust.
+</Warning>
+
+To view all current admins:
+
+```bash
+,antinuke admins
+```
+
+---
+
+## Whitelist
+
+Whitelisted users are exempt from antinuke enforcement. Their actions are not counted toward module thresholds.
+
+<CodeGroup>
+
+```bash Syntax
+,antinuke whitelist add <user>
+,antinuke whitelist remove <user>
+,antinuke whitelist
+```
+
+```bash Example
+,antinuke whitelist add @trusted-mod
+,antinuke whitelist
+```
+
+</CodeGroup>
+
+The whitelist view is paginated, showing 10 users per page. The server owner is always whitelisted and cannot be removed.
+
+---
+
+## Modules
+
+Antinuke has **10 protection modules**, each targeting a specific type of destructive action. Configure them individually to match your server's needs.
+
+### Configuring a Module
+
+Every module supports three settings: **toggle** (on/off), **threshold** (how many actions before punishment), and **punishment** (what happens to the offender).
+
+<CodeGroup>
+
+```bash Toggle
+,antinuke <module> [on/off]
+```
+
+```bash Threshold
+,antinuke <module> --threshold <number>
+```
+
+```bash Punishment
+,antinuke <module> --do <ban/kick/strip/jail>
+```
+
+```bash All at Once
+,antinuke ban on --threshold 3 --do strip
+```
+
+</CodeGroup>
+
+You can also set whether the module applies to command-based actions:
+
+```bash
+,antinuke <module> --command on
+```
+
+### Available Punishments
+
+| Punishment | What it Does |
+|-----------|-------------|
+| `ban` | Permanently bans the offender from the server |
+| `kick` | Kicks the offender from the server |
+| `strip` | Removes all roles from the offender, neutralizing their permissions |
+| `jail` | Assigns a jailed role that restricts the offender to a limited channel |
+
+### Module Reference
+
+<AccordionGroup>
+  <Accordion title="Ban Protection">
+    Monitors how many members a staff member bans within a short period. If the threshold is exceeded, the staff member is punished.
+
+    - **Module name:** `ban`
+    - **Aliases:** `antiban`, `ab`
+    - **Default threshold:** 3
+    - **Use case:** Prevents a rogue moderator from mass-banning your members.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke ban on --threshold 3 --do strip
+    ```
+    ```bash Example
+    ,antinuke ban on --threshold 5 --do ban
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Kick Protection">
+    Monitors how many members a staff member kicks within a short period.
+
+    - **Module name:** `kick`
+    - **Aliases:** `antikick`, `ak`
+    - **Default threshold:** 3
+    - **Use case:** Prevents mass-kicking of your community members.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke kick on --threshold 3 --do strip
+    ```
+    ```bash Example
+    ,antinuke kick on --threshold 4 --do kick
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Channel Protection">
+    Monitors channel creation and deletion. Triggers when a staff member creates or deletes too many channels.
+
+    - **Module name:** `channel`
+    - **Default threshold:** 3
+    - **Use case:** Prevents mass-deletion or mass-creation of channels, which is a common nuke tactic.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke channel on --threshold 3 --do ban
+    ```
+    ```bash Example
+    ,antinuke channel on --threshold 2 --do strip
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Role Protection">
+    Monitors role creation and deletion. Triggers when a staff member creates or deletes too many roles.
+
+    - **Module name:** `role`
+    - **Aliases:** `antirole`, `ar`
+    - **Default threshold:** 3
+    - **Use case:** Prevents mass-deletion of roles, which strips permissions from your members and breaks your server hierarchy.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke role on --threshold 3 --do ban
+    ```
+    ```bash Example
+    ,antinuke role on --threshold 2 --do strip
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Webhook Protection">
+    Monitors webhook creation. Webhooks are commonly used in nukes to spam channels with messages.
+
+    - **Module name:** `webhook`
+    - **Aliases:** `antiwebhook`, `aw`
+    - **Default threshold:** 3
+    - **Use case:** Prevents mass webhook creation, which is often used to flood channels with spam.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke webhook on --threshold 3 --do ban
+    ```
+    ```bash Example
+    ,antinuke webhook on --threshold 1 --do ban
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Emoji Protection">
+    Monitors emoji deletion. Triggers when a staff member deletes too many emojis from the server.
+
+    - **Module name:** `emoji`
+    - **Default threshold:** 3
+    - **Use case:** Prevents someone from wiping out your server's custom emoji collection.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke emoji on --threshold 3 --do strip
+    ```
+    ```bash Example
+    ,antinuke emoji on --threshold 5 --do kick
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Bot Add Protection">
+    Monitors when bots are added to the server. Triggers when a non-whitelisted user adds a bot.
+
+    - **Module name:** `botadd`
+    - **Default threshold:** 1
+    - **Use case:** Prevents unauthorized bot additions, which could be malicious bots designed to nuke or raid your server.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke botadd on --threshold 1 --do ban
+    ```
+    ```bash Example
+    ,antinuke botadd on --threshold 1 --do kick
+    ```
+    </CodeGroup>
+
+    <Tip>
+      Keep the threshold low for bot additions — even a single unauthorized bot can be dangerous.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Vanity Protection">
+    Monitors changes to your server's vanity URL. Triggers if someone changes or removes the vanity invite.
+
+    - **Module name:** `vanity`
+    - **Default threshold:** 1
+    - **Use case:** Protects your server's vanity URL from being stolen or changed by a compromised admin.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke vanity on --do ban
+    ```
+    ```bash Example
+    ,antinuke vanity on --threshold 1 --do ban
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Permissions Protection">
+    Monitors when dangerous Discord permissions are granted to roles. Triggers if someone gives a role a high-risk permission like Administrator or Ban Members.
+
+    - **Module name:** `permissions`
+    - **Default threshold:** 1
+    - **Use case:** Prevents privilege escalation by catching when someone gives a role dangerous permissions.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke permissions on --do strip
+    ```
+    ```bash Example
+    ,antinuke permissions on --threshold 1 --do ban
+    ```
+    </CodeGroup>
+
+    **Dangerous permissions watched by default:**
+    Administrator, Ban Members, Kick Members, Manage Guild, Manage Channels, Manage Roles, Manage Webhooks, Manage Expressions, Mention Everyone, Moderate Members, View Audit Log, Manage Nicknames
+
+    You can customize which permissions are watched:
+
+    <CodeGroup>
+    ```bash Add Permission
+    ,antinuke permission grant <permission_name>
+    ```
+    ```bash Remove Permission
+    ,antinuke permission remove <permission_name>
+    ```
+    ```bash View Watched
+    ,antinuke permission
+    ```
+    </CodeGroup>
+  </Accordion>
+
+  <Accordion title="Invite Protection">
+    Monitors and deletes foreign invite links posted in your server.
+
+    - **Module name:** `invite`
+    - **Default threshold:** 1
+    - **Use case:** Prevents users from advertising other servers in your community.
+
+    <CodeGroup>
+    ```bash Enable
+    ,antinuke invite on --do strip
+    ```
+    ```bash Example
+    ,antinuke invite on --threshold 3 --do kick
+    ```
+    </CodeGroup>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Modlog Channel
+
+Set a dedicated channel where antinuke events and punishments are logged.
+
+<CodeGroup>
+
+```bash Syntax
+,antinuke modlog [channel]
+```
+
+```bash Example
+,antinuke modlog #antinuke-logs
+,antinuke modlog
+```
+
+</CodeGroup>
+
+Running the command without a channel shows the currently configured modlog channel.
+
+---
+
+## Recommended Setup
+
+For most servers, we recommend this baseline configuration:
+
+<Steps>
+  <Step title="Run initial setup">
+    `,antinuke setup` — creates the config and logging channel.
+  </Step>
+  <Step title="Enable core modules">
+    ```
+    ,antinuke ban on --threshold 3 --do strip
+    ,antinuke kick on --threshold 3 --do strip
+    ,antinuke channel on --threshold 3 --do ban
+    ,antinuke role on --threshold 3 --do ban
+    ,antinuke webhook on --threshold 1 --do ban
+    ,antinuke botadd on --threshold 1 --do ban
+    ```
+  </Step>
+  <Step title="Whitelist trusted staff">
+    `,antinuke whitelist add @trusted-mod` for each moderator who should be exempt.
+  </Step>
+  <Step title="Enable permissions protection">
+    `,antinuke permissions on --do strip` to catch privilege escalation attempts.
+  </Step>
+</Steps>
+
+<Tip>
+  Start with the `strip` punishment for most modules. It's the safest option — it neutralizes the offender by removing their roles without permanently banning them, giving you time to investigate.
+</Tip>

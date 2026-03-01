@@ -1,0 +1,66 @@
+---
+title: "Spotify"
+description: "View and share what you're listening to on Spotify."
+icon: "music"
+---
+
+## Overview
+
+pom integrates with Spotify to let you share what you're currently listening to and control playback directly from Discord. You'll need to link your Spotify account first using the OAuth authorization flow.
+
+---
+
+## Linking Your Account
+
+Before using Spotify commands, connect your account:
+
+```bash
+,link
+```
+
+This sends you an authorization link. Click it to grant pom access to view your currently playing track. Your credentials are stored securely and can be revoked at any time.
+
+---
+
+## Now Playing
+
+See what you (or another user) are currently listening to on Spotify.
+
+<CodeGroup>
+
+```bash Syntax
+,playing [user]
+```
+
+```bash Example
+,playing
+,playing @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention | No | The user whose Spotify activity to check. Defaults to yourself |
+
+Shows the track name, artist, album, and a progress bar with the current playback position.
+
+<Info>
+  The target user must have linked their Spotify account with pom, or have Spotify activity visible in their Discord status.
+</Info>
+
+---
+
+## Spotify Panel
+
+Access a full Spotify control panel.
+
+```bash
+,spotify
+```
+
+Opens an interactive panel for managing your Spotify playback.
+
+<Tip>
+  Make sure your Spotify account is linked with `,link` before using these commands. If you encounter issues, try re-linking your account.
+</Tip>

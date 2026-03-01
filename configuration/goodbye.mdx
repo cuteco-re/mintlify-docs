@@ -1,0 +1,119 @@
+---
+title: "Goodbye Messages"
+description: "Send automatic farewell messages when members leave your server."
+icon: "door-closed"
+---
+
+## Overview
+
+Goodbye messages fire automatically when a member leaves your server — whether they left voluntarily, were kicked, or were banned. Like [welcome messages](/configuration/welcome), goodbye messages use pom's [embed scripting system](/resources/embed-scripting) and support dynamic variables for personalized farewells.
+
+You can configure multiple goodbye messages across different channels, and each one can be a plain text message, a rich embed, or both.
+
+---
+
+## Setting Up a Goodbye Message
+
+<CodeGroup>
+
+```bash Syntax
+,goodbye add <channel> <message>
+```
+
+```bash Example
+,goodbye add #goodbye {embed}$v{title: Goodbye!}$v{description: **{user}** has left the server. We now have {guild.count} members.}$v{color: #FF6B6B}$v{thumbnail: {user.display_avatar}}
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `channel` | Channel mention | Yes | The channel where the goodbye message will be sent |
+| `message` | Embed script | Yes | The message content using [embed scripting syntax](/resources/embed-scripting) |
+
+---
+
+## Managing Goodbye Messages
+
+### View
+
+See the raw embed script for a specific channel.
+
+```bash
+,goodbye view #goodbye
+```
+
+### List All
+
+Show all configured goodbye messages across the server.
+
+```bash
+,goodbye list
+```
+
+### Remove
+
+Stop sending goodbye messages in a specific channel.
+
+```bash
+,goodbye remove #goodbye
+```
+
+### Clear All
+
+Remove all goodbye messages across the entire server.
+
+```bash
+,goodbye clear
+```
+
+<Warning>
+  This removes **all** goodbye messages at once and cannot be undone.
+</Warning>
+
+---
+
+## Testing
+
+Preview your goodbye message using your own account.
+
+<CodeGroup>
+
+```bash Syntax
+,goodbye test [channel]
+```
+
+```bash Example
+,goodbye test
+,goodbye test #goodbye
+```
+
+</CodeGroup>
+
+---
+
+## Self-Destructing Messages
+
+Make goodbye messages auto-delete after a set time.
+
+```bash
+,goodbye add #goodbye {embed}$v{title: Goodbye {user}!} --self_destruct 15
+```
+
+The value must be between **6** and **60** seconds.
+
+---
+
+## Example Goodbye Messages
+
+### Simple
+```
+,goodbye add #general {message: **{user}** just left. We now have {guild.count} members.}
+```
+
+### Rich Embed
+```
+,goodbye add #goodbye {embed}$v{color: #FF6B6B}$v{title: Member Left}$v{description: **{user}** has left **{guild}**. They were member #{user.join_position_suffix}.}$v{thumbnail: {user.display_avatar}}$v{footer: {guild.count} members remain}$v{timestamp}
+```
+
+**Aliases:** `,leave`, `,bye`

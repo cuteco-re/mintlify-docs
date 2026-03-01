@@ -1,0 +1,169 @@
+---
+title: "Welcome Messages"
+description: "Automatically greet new members with customizable embed messages when they join your server."
+icon: "door-open"
+---
+
+## Overview
+
+Welcome messages let you automatically greet new members the moment they join your server. You can configure rich embeds with dynamic variables that pull in the member's name, avatar, join position, and more. Messages can be sent to any channel, and you can set up multiple welcome messages across different channels simultaneously.
+
+pom uses an [embed scripting system](/resources/embed-scripting) that gives you full control over the message appearance — titles, descriptions, colors, images, footers, buttons, and even self-destructing messages that auto-delete after a set time.
+
+<Info>
+  The default prefix is `,`. All examples below use this prefix.
+</Info>
+
+---
+
+## Setting Up a Welcome Message
+
+<CodeGroup>
+
+```bash Syntax
+,welcome add <channel> <message>
+```
+
+```bash Example
+,welcome add #welcome {embed}$v{title: Welcome to {guild}!}$v{description: Hey {user.mention}, you are member #{user.join_position_suffix}!}$v{color: #F4D679}$v{thumbnail: {user.display_avatar}}
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `channel` | Channel mention | Yes | The channel where the welcome message will be sent |
+| `message` | Embed script | Yes | The message content using [embed scripting syntax](/resources/embed-scripting) |
+
+The message fires every time a new member joins the server.
+
+---
+
+## Managing Welcome Messages
+
+### View a Welcome Message
+
+See the raw embed script for a specific channel's welcome message.
+
+<CodeGroup>
+
+```bash Syntax
+,welcome view <channel>
+```
+
+```bash Example
+,welcome view #welcome
+```
+
+</CodeGroup>
+
+### List All Welcome Messages
+
+Show all configured welcome messages across the server with pagination.
+
+```bash
+,welcome list
+```
+
+### Remove a Welcome Message
+
+Stop sending welcome messages in a specific channel.
+
+<CodeGroup>
+
+```bash Syntax
+,welcome remove <channel>
+```
+
+```bash Example
+,welcome remove #welcome
+```
+
+</CodeGroup>
+
+### Clear All Welcome Messages
+
+Remove all welcome messages across the entire server.
+
+```bash
+,welcome clear
+```
+
+<Warning>
+  This removes **all** welcome messages at once and cannot be undone.
+</Warning>
+
+---
+
+## Testing
+
+Preview your welcome message without waiting for someone to join.
+
+<CodeGroup>
+
+```bash Syntax
+,welcome test [channel]
+```
+
+```bash Example
+,welcome test
+,welcome test #welcome
+```
+
+</CodeGroup>
+
+This simulates a member join event using your own account, sending the welcome message to the specified channel (or the current channel if not specified).
+
+<Tip>
+  Always test your welcome messages after creating or editing them to make sure variables resolve correctly and the embed looks right.
+</Tip>
+
+---
+
+## Self-Destructing Messages
+
+Add the `--self_destruct` flag to make the welcome message automatically delete itself after a set number of seconds.
+
+```bash
+,welcome add #welcome {embed}$v{title: Welcome {user}!}$v{description: Enjoy your stay!} --self_destruct 30
+```
+
+The value must be between **6** and **60** seconds.
+
+---
+
+## Example Welcome Messages
+
+### Simple Text Welcome
+```
+,welcome add #general {message: Welcome to the server, {user.mention}! Make sure to read the rules.}
+```
+
+### Rich Embed Welcome
+```
+,welcome add #welcome {embed}$v{color: #F4D679}$v{title: Welcome to {guild}!}$v{description: Hey {user.mention}, you are our **{user.join_position_suffix}** member! We're glad to have you here.}$v{thumbnail: {user.display_avatar}}$v{footer: {guild} — Joined}$v{timestamp}
+```
+
+### Welcome with Button
+```
+,welcome add #welcome {embed}$v{title: Welcome!}$v{description: {user.mention} just joined. Check out the rules!}$v{button: link && Read Rules && https://discord.com/channels/.../...}
+```
+
+---
+
+## Variables
+
+Welcome messages support all [pom variables](/resources/variables). The most commonly used ones are:
+
+| Variable | Output |
+|----------|--------|
+| `{user}` | Member's display name |
+| `{user.mention}` | Mentions the member |
+| `{user.display_avatar}` | Member's avatar URL |
+| `{user.join_position_suffix}` | Join position with ordinal (e.g., "42nd") |
+| `{guild}` | Server name |
+| `{guild.count}` | Total member count |
+
+See the full [Variables Reference](/resources/variables) for the complete list.
+
+**Aliases:** `,welc`

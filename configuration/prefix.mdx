@@ -1,0 +1,61 @@
+---
+title: "Prefix"
+description: "Change or reset the command prefix for your server."
+icon: "terminal"
+---
+
+## Overview
+
+pom's default command prefix is `,` (comma). You can change this to any symbol or string that suits your server. The prefix is server-specific — changing it in one server doesn't affect any other.
+
+<Info>
+  You can always mention pom to see your current prefix, even if you've forgotten what it is: **@pom**
+</Info>
+
+---
+
+## Changing the Prefix
+
+<CodeGroup>
+
+```bash Syntax
+,prefix set <new_prefix>
+```
+
+```bash Example
+,prefix set !
+,prefix set >>
+,prefix set pom
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `new_prefix` | Text | Yes | The new prefix to use for commands |
+
+After changing the prefix, all commands use the new prefix:
+```
+!ban @user
+>>help
+pom ping
+```
+
+---
+
+## Resetting the Prefix
+
+Revert back to the default `,` prefix.
+
+```bash
+,prefix reset
+```
+
+If you've changed the prefix and can't remember what it is, mention the bot to find out:
+```
+@pom prefix reset
+```
+
+<Tip>
+  Keep your prefix short (1-2 characters) to make commands quick to type. Common choices are `,`, `!`, `.`, `-`, and `>`.
+</Tip>

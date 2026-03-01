@@ -1,0 +1,142 @@
+---
+title: "Muting & Timeouts"
+description: "Silence disruptive members using role-based mutes or Discord's native timeout system."
+icon: "volume-x"
+---
+
+## Overview
+
+pom provides two methods for silencing members: **role-based muting** and **Discord timeouts**. Role-based mutes assign a special role that strips messaging permissions across all channels. Timeouts use Discord's built-in system, which shows a visual indicator on the member and automatically expires after the set duration.
+
+---
+
+## Mute (Role-Based)
+
+Assign a muted role to a member, preventing them from sending messages in any channel. The muted role persists until manually removed — it does not expire automatically.
+
+<CodeGroup>
+
+```bash Syntax
+,mute <member> [reason]
+```
+
+```bash Example
+,mute @spammer Excessive spam in general
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `member` | User mention | Yes | The member to mute |
+| `reason` | Text | No | Reason for the mute |
+
+<Info>
+  You need the **Manage Roles** permission to use mute commands.
+</Info>
+
+### Unmute
+
+Remove the muted role from a member, restoring their ability to send messages.
+
+<CodeGroup>
+
+```bash Syntax
+,unmute <member>
+```
+
+```bash Example
+,unmute @spammer
+```
+
+</CodeGroup>
+
+---
+
+## Mute Role Configuration
+
+By default, pom looks for a role to use as the mute role. You can explicitly set which role is used with `,muterole`.
+
+<CodeGroup>
+
+```bash Syntax
+,muterole <role>
+```
+
+```bash Example
+,muterole @Muted
+```
+
+</CodeGroup>
+
+Once set, pom uses this role for all `,mute` and `,unmute` commands. The role should be configured to deny **Send Messages**, **Add Reactions**, **Create Public Threads**, and **Create Private Threads** permissions in your channel overrides.
+
+<Tip>
+  Create a role at the top of your hierarchy called "Muted" and deny Send Messages in every channel category. Then set it with `,muterole @Muted`.
+</Tip>
+
+---
+
+## Timeout (Discord Native)
+
+Apply a Discord timeout to a member. Timed-out members cannot send messages, react, join voice channels, or use the stage. The timeout automatically expires after the specified duration — no manual removal needed.
+
+<CodeGroup>
+
+```bash Syntax
+,timeout <member> <duration> [reason]
+```
+
+```bash Example
+,timeout @disruptive 1h30m Cooling off period
+,timeout @spammer 30m Spam in general
+,timeout @rulebreaker 2h Repeated violations
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `member` | User mention | Yes | The member to timeout |
+| `duration` | Time string | Yes | How long the timeout lasts (e.g., `5m`, `1h`, `2h30m`, `1d`) |
+| `reason` | Text | No | Reason for the timeout |
+
+<Info>
+  You need the **Moderate Members** permission to use timeout commands. The maximum timeout duration allowed by Discord is **28 days**.
+</Info>
+
+### Untimeout
+
+Remove a timeout from a member before it naturally expires.
+
+<CodeGroup>
+
+```bash Syntax
+,untimeout <member>
+```
+
+```bash Example
+,untimeout @disruptive
+```
+
+</CodeGroup>
+
+**Aliases:** `,uto`, `,untime`
+
+---
+
+## Mute vs. Timeout — When to Use Each
+
+| Feature | Role-Based Mute | Discord Timeout |
+|---------|----------------|-----------------|
+| **Expires automatically** | No — must be manually unmuted | Yes — expires after set duration |
+| **Visual indicator** | No built-in indicator | Shows timeout badge on member |
+| **Prevents reactions** | Depends on role setup | Yes, always |
+| **Prevents voice** | Depends on role setup | Yes, always |
+| **Works after rejoin** | Only if role is re-assigned | Yes, timeout persists |
+| **Max duration** | Unlimited | 28 days |
+| **Best for** | Permanent or long-term silencing | Temporary cooldowns |
+
+<Tip>
+  For most situations, **timeouts** are the better choice — they expire automatically, persist even if the member leaves and rejoins, and provide a clear visual indicator. Use **role-based mutes** when you need indefinite silencing or more granular per-channel control.
+</Tip>

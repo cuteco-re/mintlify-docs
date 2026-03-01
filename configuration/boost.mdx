@@ -1,0 +1,99 @@
+---
+title: "Boost Messages"
+description: "Celebrate server boosts with custom messages when members boost your server."
+icon: "rocket"
+---
+
+## Overview
+
+Boost messages fire automatically when a member boosts your server. Show your appreciation with a personalized thank-you message in any channel. Like welcome and goodbye messages, boost messages use pom's [embed scripting system](/resources/embed-scripting) and support all dynamic variables.
+
+---
+
+## Setting Up a Boost Message
+
+<CodeGroup>
+
+```bash Syntax
+,boost add <channel> <message>
+```
+
+```bash Example
+,boost add #boosts {embed}$v{title: New Boost!}$v{description: {user.mention} just boosted the server! We now have {guild.boost_count} boosts.}$v{color: #F47FFF}$v{thumbnail: {user.display_avatar}}
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `channel` | Channel mention | Yes | The channel where the boost message will be sent |
+| `message` | Embed script | Yes | The message content using [embed scripting syntax](/resources/embed-scripting) |
+
+---
+
+## Managing Boost Messages
+
+### View
+
+See the raw embed script for a specific channel.
+
+```bash
+,boost view #boosts
+```
+
+### List All
+
+Show all configured boost messages.
+
+```bash
+,boost list
+```
+
+### Remove
+
+Stop sending boost messages in a specific channel.
+
+```bash
+,boost remove #boosts
+```
+
+### Clear All
+
+Remove all boost messages across the server.
+
+```bash
+,boost clear
+```
+
+---
+
+## Testing
+
+Preview your boost message using your own account.
+
+<CodeGroup>
+
+```bash Syntax
+,boost test [channel]
+```
+
+```bash Example
+,boost test
+,boost test #boosts
+```
+
+</CodeGroup>
+
+---
+
+## Useful Variables for Boost Messages
+
+| Variable | Output |
+|----------|--------|
+| `{user}` | Booster's display name |
+| `{user.mention}` | Mentions the booster |
+| `{user.display_avatar}` | Booster's avatar URL |
+| `{guild.boost_count}` | Total number of boosts |
+| `{guild.boost_tier}` | Current boost level (Level 1/2/3) |
+
+**Aliases:** `,boostmsg`

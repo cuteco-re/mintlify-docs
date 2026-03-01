@@ -1,0 +1,151 @@
+---
+title: "Event Logging"
+description: "Keep track of everything happening in your server with detailed activity logs."
+icon: "list-tree"
+---
+
+## Overview
+
+pom's logging system monitors server activity and sends detailed log entries to channels you specify via webhooks. You can track message edits and deletions, member joins and leaves, role changes, channel modifications, voice activity, and more. Each log type can be directed to a different channel, letting you keep your logs organized.
+
+---
+
+## Setting Up Logging
+
+Add a logging channel for a specific event type.
+
+<CodeGroup>
+
+```bash Syntax
+,log add <channel> <module>
+```
+
+```bash Example
+,log add #message-logs messages
+,log add #member-logs members
+,log add #voice-logs voice
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `channel` | Channel mention | Yes | The channel where logs will be sent |
+| `module` | Event type | Yes | Which type of events to log (see table below) |
+
+---
+
+## Log Modules
+
+pom can track a wide range of server activities. Assign different modules to different channels to keep things organized.
+
+| Module | Events Tracked |
+|--------|---------------|
+| `messages` | Message edits, deletions, and bulk deletions. Shows before/after content and who deleted the message |
+| `members` | Member joins, leaves, nickname changes, role additions/removals, and timeouts |
+| `roles` | Role creation, deletion, and updates (name, color, permissions, hoist, mentionable) |
+| `channels` | Channel creation, deletion, and permission override changes |
+| `invites` | Invite link creation and deletion |
+| `emojis` | Emoji additions and removals |
+| `voice` | Voice channel joins, leaves, moves, mute/deafen toggling, and streaming status |
+
+---
+
+## Log Details
+
+### Message Logs
+
+When messages are deleted, pom records the message content, any attachments, and attempts to identify who deleted it by checking the audit log. For message edits, both the before and after content are shown.
+
+Bulk message deletions (e.g., from `,purge`) are logged as a text file attachment containing all deleted messages with timestamps and authors.
+
+### Member Logs
+
+Tracks comprehensive member activity:
+- **Joins** — account age, creation date, and a "New Account" warning if the account is less than 7 days old
+- **Leaves** — when they originally joined and when the account was created
+- **Nickname changes** — before and after nicknames with the moderator who changed it (if applicable)
+- **Role changes** — which roles were added or removed and by whom
+- **Timeouts** — when timeouts are applied or removed, with the responsible moderator
+
+### Voice Logs
+
+Records all voice state changes:
+- Joining and leaving voice channels
+- Moving between channels
+- Self-mute/unmute and self-deafen/undeafen
+- Server mute/unmute and deafen/undeafen (shows which moderator did it)
+- Stream start/stop
+
+### Channel Logs
+
+Tracks channel lifecycle and permission changes:
+- Channel creation and deletion (with who created/deleted it)
+- Permission override changes — shows which permissions were allowed, denied, or reset for each role/member
+
+### Role Logs
+
+Monitors role changes:
+- Role creation and deletion
+- Name, color, hoist, and mentionable changes
+- Permission additions and removals (detailed per-permission breakdown)
+
+---
+
+## Managing Logs
+
+### View Configuration
+
+Check which modules are being logged and where.
+
+```bash
+,log view
+```
+
+### Remove a Log
+
+Stop logging a specific module or remove a channel from the logging system.
+
+<CodeGroup>
+
+```bash Syntax
+,log remove [channel] [module]
+```
+
+```bash Example
+,log remove #message-logs messages
+```
+
+</CodeGroup>
+
+Running `,log remove` without arguments removes all logging configuration.
+
+---
+
+## Ignore System
+
+You can exclude specific members or channels from being logged.
+
+### Ignore a Member
+
+```bash
+,log ignore <member>
+```
+
+Actions by ignored members will not appear in any logs.
+
+### Ignore a Channel
+
+```bash
+,log ignore <channel>
+```
+
+Activity in ignored channels will not be logged.
+
+<Tip>
+  You can log multiple modules to the same channel. Run `,log add` for each module you want to track in that channel.
+</Tip>
+
+<Tip>
+  pom uses webhooks for logging, which means log messages appear with the bot's name and avatar. The webhooks are created and managed automatically.
+</Tip>

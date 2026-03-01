@@ -1,0 +1,57 @@
+---
+title: "Moderation Overview"
+description: "A complete toolkit for managing your Discord server's members and channels."
+icon: "gavel"
+---
+
+## Overview
+
+pom provides a comprehensive set of moderation tools that cover every aspect of server management — from banning disruptive members to cleaning up channels and managing roles. All moderation commands include hierarchy checks to prevent misuse, and most log the responsible moderator for accountability.
+
+<Info>
+  pom enforces a **role hierarchy** on all moderation commands. You can only moderate members whose highest role is below yours. You cannot moderate the server owner, and you cannot moderate yourself.
+</Info>
+
+---
+
+## Available Tools
+
+<CardGroup cols={2}>
+  <Card title="Banning" icon="ban" href="/moderation/banning">
+    Permanently or temporarily remove members from your server with `,ban` and `,unban`.
+  </Card>
+  <Card title="Muting & Timeouts" icon="volume-x" href="/moderation/muting">
+    Silence members with role-based mutes or Discord's native timeout feature.
+  </Card>
+  <Card title="Channel Management" icon="hash" href="/moderation/channel-management">
+    Lock channels, purge messages, nuke and recreate channels, pin messages, and more.
+  </Card>
+  <Card title="Member Management" icon="users" href="/moderation/member-management">
+    Kick members, change nicknames, and manage roles.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Reference
+
+| Command | What it Does | Permission Required |
+|---------|-------------|-------------------|
+| `,ban` | Ban a member | Ban Members |
+| `,unban` | Unban a member | Ban Members |
+| `,kick` | Kick a member | Kick Members |
+| `,mute` | Mute via role | Manage Roles |
+| `,unmute` | Remove mute role | Manage Roles |
+| `,timeout` | Discord timeout | Moderate Members |
+| `,untimeout` | Remove timeout | Moderate Members |
+| `,lockdown` | Lock a channel | Manage Channels |
+| `,unlock` | Unlock a channel | Manage Channels |
+| `,purge` | Delete messages in bulk | Manage Messages |
+| `,nuke` | Clone & recreate channel | Manage Channels |
+| `,nick` | Change a member's nickname | Manage Nicknames |
+| `,role` | Toggle a role on a member | Manage Roles |
+| `,pin` / `,unpin` | Pin or unpin a message | Manage Messages |
+
+<Tip>
+  Set up [event logging](/configuration/logging) to keep a record of all moderation actions in a dedicated channel.
+</Tip>

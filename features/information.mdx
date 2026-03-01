@@ -1,0 +1,181 @@
+---
+title: "Information"
+description: "Look up user profiles, server details, avatars, banners, and more."
+icon: "info"
+---
+
+## Overview
+
+pom provides a set of information commands for looking up details about users, the server, and various server statistics. These are read-only commands that don't require any special permissions — anyone can use them.
+
+---
+
+## User Commands
+
+### Avatar
+
+Get a user's profile picture at full resolution.
+
+<CodeGroup>
+
+```bash Syntax
+,avatar [user]
+```
+
+```bash Example
+,avatar
+,avatar @friend
+,avatar 123456789012345678
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention or ID | No | The user whose avatar to display. Defaults to yourself |
+
+Returns the avatar in the highest available resolution with download links for different formats (PNG, JPG, WebP, GIF for animated avatars).
+
+### Banner
+
+Get a user's profile banner at full resolution.
+
+<CodeGroup>
+
+```bash Syntax
+,banner [user]
+```
+
+```bash Example
+,banner
+,banner @friend
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User mention or ID | No | The user whose banner to display. Defaults to yourself |
+
+<Info>
+  Not all users have banners — this is a Discord Nitro feature.
+</Info>
+
+### User Info
+
+Get detailed information about a user, including their account creation date, server join date, roles, badges, and status.
+
+<CodeGroup>
+
+```bash Syntax
+,userinfo [user]
+```
+
+```bash Example
+,userinfo
+,userinfo @friend
+```
+
+</CodeGroup>
+
+Shows:
+- Username, display name, and user ID
+- Account creation date and age
+- Server join date and join position
+- Current status and activity
+- Roles list
+- Badges (Nitro, Hypesquad, etc.)
+- Boost status
+
+### Names
+
+View a user's previous usernames.
+
+<CodeGroup>
+
+```bash Syntax
+,names [user]
+```
+
+```bash Example
+,names
+,names @friend
+```
+
+</CodeGroup>
+
+### Connections
+
+View a user's connected accounts (Spotify, GitHub, YouTube, etc.) if they have them set to public on their Discord profile.
+
+<CodeGroup>
+
+```bash Syntax
+,connections [user]
+```
+
+```bash Example
+,connections
+,connections @friend
+```
+
+</CodeGroup>
+
+### Permissions
+
+View a member's Discord permissions in the current server.
+
+<CodeGroup>
+
+```bash Syntax
+,perms [member]
+```
+
+```bash Example
+,perms
+,perms @moderator
+```
+
+</CodeGroup>
+
+Shows a formatted list of all permissions the member has, derived from their roles.
+
+---
+
+## Server Commands
+
+### Server Info
+
+Get detailed information about the current server.
+
+```bash
+,serverinfo
+```
+
+Shows:
+- Server name, ID, and icon
+- Owner
+- Creation date
+- Member count (total, online, bots)
+- Channel count (text, voice, categories)
+- Role count
+- Boost level and boost count
+- Features (verification level, content filter, etc.)
+
+### Boosters
+
+List all members currently boosting the server, along with when they started boosting.
+
+```bash
+,boosters
+```
+
+The list is paginated and sorted by boost duration.
+
+### Member Count
+
+Get a quick count of the server's total members.
+
+```bash
+,membercount
+```

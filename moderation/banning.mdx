@@ -1,0 +1,77 @@
+---
+title: "Banning"
+description: "Permanently remove members from your server and manage your ban list."
+icon: "ban"
+---
+
+## Overview
+
+Banning is the most severe moderation action — it removes a member from the server and prevents them from rejoining until they are unbanned. pom's ban command includes safety checks like role hierarchy enforcement and optional reason logging that appears in Discord's audit log.
+
+---
+
+## Ban
+
+Permanently ban a member from the server. The member is immediately removed and cannot rejoin until unbanned.
+
+<CodeGroup>
+
+```bash Syntax
+,ban <member> [reason]
+```
+
+```bash Example
+,ban @disruptive-user Repeated rule violations
+,ban 123456789012345678 Raiding
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `member` | User mention or ID | Yes | The member to ban. You can ban by mention, username, or user ID (including users not in the server) |
+| `reason` | Text | No | The reason for the ban, recorded in Discord's audit log |
+
+### Safety Checks
+
+pom performs several checks before executing a ban:
+
+- **Role hierarchy** — your highest role must be above the target's highest role
+- **Self-targeting** — you cannot ban yourself
+- **Owner protection** — you cannot ban the server owner
+- **Bot permissions** — pom must have the Ban Members permission and a role higher than the target
+
+<Info>
+  You need the **Ban Members** permission to use this command.
+</Info>
+
+---
+
+## Unban
+
+Remove a ban from a user, allowing them to rejoin the server.
+
+<CodeGroup>
+
+```bash Syntax
+,unban <user>
+```
+
+```bash Example
+,unban 123456789012345678
+,unban username
+```
+
+</CodeGroup>
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user` | User ID or name | Yes | The banned user to unban. Since they aren't in the server, use their user ID or exact username |
+
+<Info>
+  You need the **Ban Members** permission to use this command.
+</Info>
+
+<Tip>
+  You can find banned users' IDs in **Server Settings → Bans** in Discord, or by checking your [audit logs](/security/audits).
+</Tip>
