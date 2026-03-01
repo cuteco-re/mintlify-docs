@@ -38,61 +38,66 @@
     }
   },
   "navigation": {
-    "groups": [
+    "tabs": [
       {
-        "group": "Overview",
-        "pages": [
-          "getting-started",
-          "customization"
-        ]
-      },
-      {
-        "group": "Security",
-        "pages": [
-          "security/antinuke",
-          "security/audits"
-        ]
-      },
-      {
-        "group": "Moderation",
-        "pages": [
-          "moderation/overview",
-          "moderation/banning",
-          "moderation/muting",
-          "moderation/channel-management",
-          "moderation/member-management"
-        ]
-      },
-      {
-        "group": "Configuration",
-        "pages": [
-          "configuration/welcome",
-          "configuration/goodbye",
-          "configuration/boost",
-          "configuration/autoresponder",
-          "configuration/logging",
-          "configuration/prefix",
-          "configuration/skullboard",
-          "configuration/botprofile"
-        ]
-      },
-      {
-        "group": "Features",
-        "pages": [
-          "features/voicemaster",
-          "features/tracking",
-          "features/information",
-          "features/utility",
-          "features/spotify",
-          "features/fun"
-        ]
-      },
-      {
-        "group": "Resources",
-        "pages": [
-          "resources/embed-scripting",
-          "resources/variables",
-          "resources/permissions"
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "getting-started",
+              "customization"
+            ]
+          },
+          {
+            "group": "Security",
+            "pages": [
+              "security/antinuke",
+              "security/audits"
+            ]
+          },
+          {
+            "group": "Moderation",
+            "pages": [
+              "moderation/overview",
+              "moderation/banning",
+              "moderation/muting",
+              "moderation/channel-management",
+              "moderation/member-management"
+            ]
+          },
+          {
+            "group": "Configuration",
+            "pages": [
+              "configuration/welcome",
+              "configuration/goodbye",
+              "configuration/boost",
+              "configuration/autoresponder",
+              "configuration/logging",
+              "configuration/prefix",
+              "configuration/skullboard",
+              "configuration/botprofile"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/voicemaster",
+              "features/tracking",
+              "features/information",
+              "features/utility",
+              "features/spotify",
+              "features/fun"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "resources/embed-scripting",
+              "resources/variables",
+              "resources/permissions"
+            ]
+          }
         ]
       }
     ]
